@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\csgray\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl400\sa213\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+1. I want to know how many employees with each title were born after 1965-01-01.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf3 \kerning1\expnd0\expndtw0 \CocoaLigature0 mysql> select d.dept_name as 'Departments', \
+    -> count(e.birth_date) as '# Of Emp Born After 1965-01-01' \
+    -> from departments d \
+    -> inner join dept_emp de on de.dept_no = d.dept_no \
+    -> inner join employees e on e.emp_no = de.emp_no\
+    -> where e.birth_date > '1965-01-01'\
+    -> group by d.dept_name;\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\CocoaLigature1 2. I want to know the average salary per title.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf3 \kerning1\expnd0\expndtw0 \CocoaLigature0 mysql> select t.title as 'Title', \
+    -> avg(s.salary) as 'Average Salary'\
+    -> from titles t\
+    -> inner join salaries s on s.emp_no = t.emp_no\
+    -> group by t.title;\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\CocoaLigature1 3. How much money was spent on salary for the marketing department between the years 1990 and 1992?\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf3 \kerning1\expnd0\expndtw0 \CocoaLigature0 mysql> select\
+    -> sum(s.salary) as "Money Spend On Salaries \'9390'-92'", \
+    -> d.dept_name as 'Department' from departments d \
+    -> inner join dept_emp de on de.dept_no = d.dept_no \
+    -> inner join salaries s on s.emp_no = de.emp_no \
+    -> where s.from_date <= \'911992-12-31\'92 and \
+    -> s.to_date >= \'921990-01-01' and \
+\pard\pardeftab720\partightenfactor0
+    -> d.dept_name = 'Marketing';}
