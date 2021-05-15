@@ -8,15 +8,14 @@
 
 \f0\fs32 \cf2 \expnd0\expndtw0\kerning0
 1. I want to know how many employees with each title were born after 1965-01-01.\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f1\fs22 \cf3 \kerning1\expnd0\expndtw0 \CocoaLigature0 mysql> select d.dept_name as 'Departments', \
-    -> count(e.birth_date) as '# Of Emp Born After 1965-01-01' \
-    -> from departments d \
-    -> inner join dept_emp de on de.dept_no = d.dept_no \
-    -> inner join employees e on e.emp_no = de.emp_no\
-    -> where e.birth_date > '1965-01-01'\
-    -> group by d.dept_name;\
+\f1\fs22 \cf3 \kerning1\expnd0\expndtw0 \CocoaLigature0 mysql> SELECT t.title as 'Title', count(e.birth_date) \
+    -> as "# of Employees Born After 1965-01-01"\
+    -> from employees e \
+    -> inner join titles t on t.emp_no = e.emp_no \
+    -> where birth_date > '1965-01-01'\
+    -> group by t.title ;\
 \
 \pard\pardeftab720\partightenfactor0
 
